@@ -1,6 +1,6 @@
 # BDApp
 
-Application Android personnelle pour cataloguer une collection de bandes dessinées : où chaque album est rangé, combien il vaut (cote BDthèque) et un écran pour vérifier si un album est déjà possédé.
+Application Android personnelle pour cataloguer une collection de bandes dessinées : savoir si un album est déjà possédé, connaître sa cote BDthèque et la valeur totale de la collection.
 
 100 % locale : pas de compte, pas de serveur, pas de télémétrie.
 
@@ -8,13 +8,12 @@ Application Android personnelle pour cataloguer une collection de bandes dessin�
 
 ## Fonctionnalités
 
-- **Scan en rafale**, avec la date d'ajout (aujourd'hui par défaut, modifiable ici et dans la fiche) des codes-barres ISBN (CameraX + ML Kit). Chaque album est enregistré tout de suite sur l'étagère choisie, puis la cote, la série, le tome et la couverture arrivent en arrière-plan. Les albums anciens sans code-barres s'ajoutent par leur titre.
+- **Scan en rafale** des codes-barres ISBN (CameraX + ML Kit), avec la date d'ajout (aujourd'hui par défaut, modifiable ici et dans la fiche). Chaque album est enregistré tout de suite, puis la cote, la série, le tome et la couverture arrivent en arrière-plan. Les albums anciens sans code-barres s'ajoutent par leur titre.
 - **Cote BDthèque** : l'album est retrouvé sur bedetheque.com par ISBN, puis l'édition est identifiée. Quand l'EO et ses rééditions partagent l'ISBN avec des cotes différentes, l'album passe en « édition à choisir ». L'écran détail montre alors chaque édition avec son dépôt légal, sa cote et la note « Info édition ».
 - **Vérifier** : scanner (ou taper) un ISBN dit tout de suite si l'album est déjà dans la collection, y compris pour les albums importés sans ISBN (BDthèque donne la série et le tome, comparés à la collection). Recherche par titre, série ou auteur.
-- **Liste** : recherche par titre, série ou auteur, tri, filtres (cote manquante, édition à choisir, cotées, par meuble), regroupement par série et valeur totale estimée.
-- **Détail** : historique de la cote, rafraîchissement, cote saisie à la main, lien manuel vers une fiche, déplacement sur les étagères.
+- **Liste** : recherche par titre, série ou auteur, tri, filtres (cote manquante, édition à choisir, cotées, dédicacées), regroupement par série et valeur totale estimée.
+- **Détail** : historique de la cote, rafraîchissement, cote saisie à la main, lien manuel vers une fiche.
 - **Mises à jour en masse** (toute la collection, une série, un auteur) via WorkManager, avec notification, annulation et reprise après interruption.
-- **Emplacements** : meubles et étagères à créer, renommer, réordonner et supprimer.
 - **Sauvegarde** : export et import de toute la collection dans un fichier JSON, par exemple pour passer d'un téléphone à l'autre.
 - Consultation hors ligne : les couvertures sont copiées en local.
 

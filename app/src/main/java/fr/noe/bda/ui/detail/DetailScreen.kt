@@ -19,8 +19,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -41,7 +39,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
@@ -61,7 +58,6 @@ import fr.noe.bda.data.bedetheque.Edition
 import fr.noe.bda.data.bedetheque.Fiche
 import fr.noe.bda.data.local.BdaDao
 import fr.noe.bda.data.local.CoteStatut
-import fr.noe.bda.ui.commun.ChoixEtagere
 import fr.noe.bda.ui.commun.Couverture
 import fr.noe.bda.ui.commun.coteLibelle
 import fr.noe.bda.ui.commun.libelle
@@ -90,7 +86,6 @@ class DetailViewModel @Inject constructor(
     val id: Long = checkNotNull(savedState["id"])
     val album = dao.observerAlbum(id).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
     val historique = dao.observerHistorique(id).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-    val meubles = dao.observerMeubles().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
     val occupe = MutableStateFlow(false)
     val choix = MutableStateFlow<Choix?>(null)
 
@@ -100,8 +95,6 @@ class DetailViewModel @Inject constructor(
     }
 
     fun rafraichir() = tache { cotes.rafraichir(id) }
-    fun deplacer(etagereId: Long?) = tache { dao.deplacer(id, etagereId) }
-    fun decaler(sens: Int) = tache { dao.decaler(id, sens) }
     fun saisirCote(min: Int?, max: Int?) = tache { cotes.saisirManuellement(id, min, max) }
     fun reprendreAutomatique() = tache { cotes.reprendreAutomatique(id) }
     fun mettreAJourSerie() = album.value?.album?.serie?.let { CoteWorker.mettreAJour(context, Portee.SERIE, it) }
@@ -141,7 +134,6 @@ class DetailViewModel @Inject constructor(
 fun DetailScreen(onRetour: () -> Unit, viewModel: DetailViewModel = hiltViewModel()) {
     val complet by viewModel.album.collectAsStateWithLifecycle()
     val historique by viewModel.historique.collectAsStateWithLifecycle()
-    val meubles by viewModel.meubles.collectAsStateWithLifecycle()
     val occupe by viewModel.occupe.collectAsStateWithLifecycle()
     val choix by viewModel.choix.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -213,11 +205,6 @@ fun DetailScreen(onRetour: () -> Unit, viewModel: DetailViewModel = hiltViewMode
             }
 
             HorizontalDivider()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                ChoixEtagere(meubles, album.etagereId, viewModel::deplacer, Modifier.weight(1f))
-                IconButton(onClick = { viewModel.decaler(-1) }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, "Décaler à gauche") }
-                IconButton(onClick = { viewModel.decaler(1) }) { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, "Décaler à droite") }
-            }
             TextButton(onClick = { dialogue = "supprimer" }) { Text("Supprimer l'album", color = MaterialTheme.colorScheme.error) }
         }
 

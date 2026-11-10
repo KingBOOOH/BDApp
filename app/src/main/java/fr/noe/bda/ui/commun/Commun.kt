@@ -2,18 +2,13 @@ package fr.noe.bda.ui.commun
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuAnchorType
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -29,8 +24,6 @@ import fr.noe.bda.data.bedetheque.Cote
 import fr.noe.bda.data.bedetheque.normaliser
 import fr.noe.bda.data.local.Album
 import fr.noe.bda.data.local.CoteStatut
-import fr.noe.bda.data.local.MeubleComplet
-import fr.noe.bda.data.local.TypeEtagere
 import java.io.File
 import java.text.DateFormat
 import java.util.Date
@@ -64,11 +57,6 @@ fun Album.libelle(): String =
     listOfNotNull(serie?.let { s -> tome?.let { "$s $it" } ?: s }, titre.takeIf { normaliser(it) != serieNorm })
         .joinToString(" · ")
 
-fun List<MeubleComplet>.libelleEtagere(etagereId: Long?): String {
-    for (m in this) m.etageres.firstOrNull { it.id == etagereId }?.let { return "${m.meuble.nom} › ${it.nom}" }
-    return "Sans emplacement"
-}
-
 /** The local copy when there is one, so it shows offline. */
 @Composable
 fun Couverture(album: Album, modifier: Modifier = Modifier) {
@@ -77,35 +65,6 @@ fun Couverture(album: Album, modifier: Modifier = Modifier) {
         Box(modifier.background(MaterialTheme.colorScheme.surfaceVariant))
     } else {
         AsyncImage(model = modele, contentDescription = null, contentScale = ContentScale.Crop, modifier = modifier)
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ChoixEtagere(
-    meubles: List<MeubleComplet>,
-    etagereId: Long?,
-    onChoix: (Long?) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    var ouvert by remember { mutableStateOf(false) }
-    ExposedDropdownMenuBox(expanded = ouvert, onExpandedChange = { ouvert = it }, modifier = modifier) {
-        OutlinedTextField(
-            value = meubles.libelleEtagere(etagereId),
-            onValueChange = {},
-            readOnly = true,
-            label = { Text("Emplacement") },
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(ouvert) },
-            modifier = Modifier.fillMaxWidth().menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
-        )
-        ExposedDropdownMenu(expanded = ouvert, onDismissRequest = { ouvert = false }) {
-            DropdownMenuItem(text = { Text("Sans emplacement") }, onClick = { onChoix(null); ouvert = false })
-            meubles.forEach { m ->
-                m.etageres.sortedBy { it.ordre }.filter { it.type != TypeEtagere.FIGURINES }.forEach { e ->
-                    DropdownMenuItem(text = { Text("${m.meuble.nom} › ${e.nom}") }, onClick = { onChoix(e.id); ouvert = false })
-                }
-            }
-        }
     }
 }
 

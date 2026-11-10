@@ -117,7 +117,7 @@ class OutilsViewModel @Inject constructor(
 }
 
 @Composable
-fun OutilsScreen(onEmplacements: () -> Unit, onFaisabilite: () -> Unit, viewModel: OutilsViewModel = hiltViewModel()) {
+fun OutilsScreen(onFaisabilite: () -> Unit, viewModel: OutilsViewModel = hiltViewModel()) {
     val series by viewModel.series.collectAsStateWithLifecycle()
     val auteurs by viewModel.auteurs.collectAsStateWithLifecycle()
     val travail by viewModel.travail.collectAsStateWithLifecycle()
@@ -148,9 +148,6 @@ fun OutilsScreen(onEmplacements: () -> Unit, onFaisabilite: () -> Unit, viewMode
         ChoixEtAction("Série", series, enabled = !enCours) { lancer(Portee.SERIE, it) }
         ChoixEtAction("Auteur", auteurs, enabled = !enCours) { lancer(Portee.AUTEUR, it) }
 
-        HorizontalDivider()
-        Text("Rangement", style = MaterialTheme.typography.titleMedium)
-        OutlinedButton(onClick = onEmplacements) { Text("Meubles et étagères") }
 
         HorizontalDivider()
         Text("Sauvegarde", style = MaterialTheme.typography.titleMedium)
@@ -171,8 +168,8 @@ fun OutilsScreen(onEmplacements: () -> Unit, onFaisabilite: () -> Unit, viewMode
             title = { Text("Importer ${contenu.albums.size} albums") },
             text = {
                 Text(
-                    "Ajouter : les albums du fichier rejoignent la collection, sans rien effacer (rangement compris).\n\n" +
-                        "Remplacer : la collection devient celle du fichier, meubles compris. Exportez-la d'abord si besoin.",
+                    "Ajouter : les albums du fichier rejoignent la collection, sans rien effacer.\n\n" +
+                        "Remplacer : la collection devient celle du fichier. Exportez-la d'abord si besoin.",
                 )
             },
             confirmButton = {

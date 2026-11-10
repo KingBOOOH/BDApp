@@ -41,7 +41,6 @@ import fr.noe.bda.data.local.BdaDao
 import fr.noe.bda.data.lookup.BookLookup
 import fr.noe.bda.data.lookup.LookupResult
 import fr.noe.bda.ui.commun.ChoixDate
-import fr.noe.bda.ui.commun.ChoixEtagere
 import fr.noe.bda.ui.commun.dateLibelle
 import fr.noe.bda.ui.commun.Couverture
 import fr.noe.bda.ui.commun.coteLibelle
@@ -68,24 +67,17 @@ class AjoutViewModel @Inject constructor(
     private val lookup: BookLookup,
 ) : ViewModel() {
 
-    val etagereId = MutableStateFlow<Long?>(null)
     /** Date given to the albums added now; null is "today", stamped at the moment of each scan. */
     val date = MutableStateFlow<Long?>(null)
     private val scans = MutableStateFlow<List<Scan>>(emptyList())
-    // Saves one at a time, so two quick scans don't take the same shelf position
+    // Saves one at a time, so two quick scans of the same ISBN don't create two albums
     private val verrou = Mutex()
-
-    val meubles = dao.observerMeubles().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
     /** The session's scans, newest first, with their album as it is now (cote filled in by the worker). */
     val lignes = combine(scans, dao.observerAlbums()) { s, albums ->
         val parId = albums.associateBy { it.album.id }
         s.map { it to it.albumId?.let(parId::get)?.album }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-
-    init {
-        viewModelScope.launch { etagereId.value = dao.derniereEtagere() }
-    }
 
     fun scanner(isbn13: String) = viewModelScope.launch {
         verrou.withLock {
@@ -107,8 +99,7 @@ class AjoutViewModel @Inject constructor(
     }
 
     private suspend fun enregistrer(cle: String, album: Album, auteurs: List<String>) {
-        val etagere = etagereId.value
-        val id = dao.ajouter(album.copy(ajouteLe = date.value ?: System.currentTimeMillis(), etagereId = etagere, position = etagere?.let { dao.positionSuivante(it) } ?: 0), auteurs)
+        val id = dao.ajouter(album.copy(ajouteLe = date.value ?: System.currentTimeMillis()), auteurs)
         noter(Scan(cle, id, "ajouté"))
         CoteWorker.chercherNouveaux(context)
     }
@@ -118,8 +109,6 @@ class AjoutViewModel @Inject constructor(
 
 @Composable
 fun AjoutScreen(onAlbum: (Long) -> Unit, viewModel: AjoutViewModel = hiltViewModel()) {
-    val meubles by viewModel.meubles.collectAsStateWithLifecycle()
-    val etagereId by viewModel.etagereId.collectAsStateWithLifecycle()
     val lignes by viewModel.lignes.collectAsStateWithLifecycle()
     val date by viewModel.date.collectAsStateWithLifecycle()
     var saisie by remember { mutableStateOf("") }
@@ -129,7 +118,6 @@ fun AjoutScreen(onAlbum: (Long) -> Unit, viewModel: AjoutViewModel = hiltViewMod
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        item { ChoixEtagere(meubles, etagereId, { viewModel.etagereId.value = it }, Modifier.fillMaxWidth()) }
         item { ChoixDate(date ?: System.currentTimeMillis(), { viewModel.date.value = it }) }
         item {
             ScannerIsbn(

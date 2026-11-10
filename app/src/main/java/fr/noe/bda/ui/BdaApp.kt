@@ -28,7 +28,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import fr.noe.bda.ui.ajout.AjoutScreen
 import fr.noe.bda.ui.detail.DetailScreen
-import fr.noe.bda.ui.emplacements.EmplacementsScreen
 import fr.noe.bda.ui.faisabilite.FaisabiliteScreen
 import fr.noe.bda.ui.liste.ListeScreen
 import fr.noe.bda.ui.outils.OutilsScreen
@@ -77,12 +76,11 @@ fun BdaApp() {
             composable(Onglet.LISTE.route) { Onglet { ListeScreen(ouvrirAlbum) } }
             composable(Onglet.AJOUT.route) { Onglet { AjoutScreen(ouvrirAlbum) } }
             composable(Onglet.OUTILS.route) {
-                Onglet { OutilsScreen(onEmplacements = { nav.navigate("emplacements") }, onFaisabilite = { nav.navigate("faisabilite") }) }
+                Onglet { OutilsScreen(onFaisabilite = { nav.navigate("faisabilite") }) }
             }
             composable("album/{id}", arguments = listOf(navArgument("id") { type = NavType.LongType })) {
                 DetailScreen(onRetour = { nav.popBackStack() })
             }
-            composable("emplacements") { EmplacementsScreen(onRetour = { nav.popBackStack() }) }
             composable("faisabilite") { FaisabiliteScreen() }
         }
     }

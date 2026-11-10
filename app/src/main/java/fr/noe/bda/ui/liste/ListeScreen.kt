@@ -37,11 +37,9 @@ import fr.noe.bda.data.bedetheque.normaliser
 import fr.noe.bda.data.local.AlbumComplet
 import fr.noe.bda.data.local.BdaDao
 import fr.noe.bda.data.local.CoteStatut
-import fr.noe.bda.data.local.MeubleComplet
 import fr.noe.bda.ui.commun.Couverture
 import fr.noe.bda.ui.commun.MenuChip
 import fr.noe.bda.ui.commun.coteLibelle
-import fr.noe.bda.ui.commun.libelleEtagere
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -61,13 +59,11 @@ data class Criteres(
     val recherche: String = "",
     val tri: Tri = Tri.SERIE,
     val filtre: Filtre? = null,
-    val meubleId: Long? = null,
     val parSerie: Boolean = true,
 )
 
 data class ListeState(
     val albums: List<AlbumComplet> = emptyList(),
-    val meubles: List<MeubleComplet> = emptyList(),
     val nbTotal: Int = 0,
     /** Estimated value of the whole collection, not just the filtered albums. */
     val valeurTotale: Int = 0,
@@ -84,12 +80,10 @@ class ListeViewModel @Inject constructor(dao: BdaDao) : ViewModel() {
 
     val criteres = MutableStateFlow(Criteres())
 
-    val state = combine(dao.observerAlbums(), dao.observerMeubles(), criteres) { tous, meubles, c ->
+    val state = combine(dao.observerAlbums(), criteres) { tous, c ->
         val q = normaliser(c.recherche)
-        val etageresDuMeuble = meubles.firstOrNull { it.meuble.id == c.meubleId }?.etageres?.map { it.id }?.toSet()
         val albums = tous.filter { a ->
             a.correspond(q) &&
-                (etageresDuMeuble == null || a.album.etagereId in etageresDuMeuble) &&
                 when (c.filtre) {
                     null -> true
                     Filtre.COTE_MANQUANTE -> a.album.coteEstimee == null && a.album.coteStatut != CoteStatut.NON_COTEE
@@ -107,7 +101,6 @@ class ListeViewModel @Inject constructor(dao: BdaDao) : ViewModel() {
         )
         ListeState(
             albums = albums,
-            meubles = meubles,
             nbTotal = tous.size,
             valeurTotale = tous.sumOf { it.album.coteEstimee ?: 0 },
             valeurAffichee = albums.sumOf { it.album.coteEstimee ?: 0 },
@@ -133,11 +126,6 @@ fun ListeScreen(onAlbum: (Long) -> Unit, viewModel: ListeViewModel = hiltViewMod
             )
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 MenuChip("Tri : ${c.tri.libelle}", Tri.entries.map { it.libelle to { maj { c -> c.copy(tri = it) } } })
-                MenuChip(
-                    state.meubles.firstOrNull { it.meuble.id == c.meubleId }?.meuble?.nom ?: "Tous les meubles",
-                    listOf("Tous les meubles" to { maj { it.copy(meubleId = null) } }) +
-                        state.meubles.map { m -> m.meuble.nom to { maj { it.copy(meubleId = m.meuble.id) } } },
-                )
                 FilterChip(c.parSerie, { maj { it.copy(parSerie = !it.parSerie) } }, { Text("Par série") })
                 Filtre.entries.forEach { f ->
                     FilterChip(c.filtre == f, { maj { it.copy(filtre = if (it.filtre == f) null else f) } }, { Text(f.libelle) })
@@ -161,14 +149,14 @@ fun ListeScreen(onAlbum: (Long) -> Unit, viewModel: ListeViewModel = hiltViewMod
                         )
                     }
                 }
-                items(albums, key = { it.album.id }) { a -> Ligne(a, state.meubles, onAlbum) }
+                items(albums, key = { it.album.id }) { a -> Ligne(a, onAlbum) }
             }
         }
     }
 }
 
 @Composable
-private fun Ligne(a: AlbumComplet, meubles: List<MeubleComplet>, onAlbum: (Long) -> Unit) {
+private fun Ligne(a: AlbumComplet, onAlbum: (Long) -> Unit) {
     Row(
         Modifier.fillMaxWidth().clickable { onAlbum(a.album.id) }.padding(horizontal = 16.dp, vertical = 6.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -184,7 +172,6 @@ private fun Ligne(a: AlbumComplet, meubles: List<MeubleComplet>, onAlbum: (Long)
                 listOfNotNull(
                     "dédicacée".takeIf { a.album.dedicace },
                     a.auteurs.joinToString { it.nom }.ifEmpty { null },
-                    meubles.libelleEtagere(a.album.etagereId),
                 ).joinToString(" · "),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1, overflow = TextOverflow.Ellipsis,

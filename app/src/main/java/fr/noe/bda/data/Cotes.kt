@@ -161,13 +161,11 @@ class Cotes @Inject constructor(
         return dao.sansIsbnAuTome(fiche.tome).firstOrNull { it.id != scanne.id && cleSerie(it.serie ?: it.titre) in cles }
     }
 
-    /** Keeps the imported album (its cote and history) with the scan's ISBN and shelf; drops the scan's row. */
+    /** Keeps the imported album (its cote and history) with the scan's ISBN; drops the scan's row. */
     private suspend fun fusionner(scanne: Album, jumeau: Album, fiche: Fiche, edition: Edition) {
         dao.supprimerAlbum(scanne) // first: the ISBN is unique
         val fusionne = jumeau.copy(
             isbn = scanne.isbn,
-            etagereId = scanne.etagereId ?: jumeau.etagereId,
-            position = if (scanne.etagereId != null) scanne.position else jumeau.position,
             hauteurCm = jumeau.hauteurCm ?: scanne.hauteurCm,
             epaisseurCm = jumeau.epaisseurCm ?: scanne.epaisseurCm,
             pages = jumeau.pages ?: scanne.pages,

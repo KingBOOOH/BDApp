@@ -5,8 +5,6 @@ import fr.noe.bda.data.local.AlbumAuteur
 import fr.noe.bda.data.local.Auteur
 import fr.noe.bda.data.local.BdaDao
 import fr.noe.bda.data.local.CoteHistorique
-import fr.noe.bda.data.local.Etagere
-import fr.noe.bda.data.local.Meuble
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
@@ -17,8 +15,6 @@ import javax.inject.Singleton
 data class Contenu(
     val version: Int = 1,
     val exporteLe: Long,
-    val meubles: List<Meuble>,
-    val etageres: List<Etagere>,
     val albums: List<Album>,
     val auteurs: List<Auteur>,
     val albumsAuteurs: List<AlbumAuteur>,
@@ -33,8 +29,6 @@ class Sauvegarde @Inject constructor(private val dao: BdaDao) {
     suspend fun exporter(): String = json.encodeToString(
         Contenu(
             exporteLe = System.currentTimeMillis(),
-            meubles = dao.tousMeubles(),
-            etageres = dao.toutesEtageres(),
             albums = dao.tousAlbums(),
             auteurs = dao.tousAuteurs(),
             albumsAuteurs = dao.tousLiens(),
@@ -54,7 +48,6 @@ class Sauvegarde @Inject constructor(private val dao: BdaDao) {
 
     suspend fun restaurer(contenu: Contenu) {
         dao.remplacerTout(
-            contenu.meubles, contenu.etageres,
             // Paths from another phone mean nothing here; covers then load from their URL, spine colours are kept
             contenu.albums.map { it.copy(couvertureFichier = null) },
             contenu.auteurs, contenu.albumsAuteurs, contenu.historique,

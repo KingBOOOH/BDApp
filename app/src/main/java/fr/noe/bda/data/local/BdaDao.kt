@@ -116,87 +116,24 @@ abstract class BdaDao {
     @Query("SELECT * FROM cote_historique WHERE albumId = :albumId ORDER BY date DESC LIMIT 1")
     abstract suspend fun derniereCote(albumId: Long): CoteHistorique?
 
-    // Locations
-
-    @Transaction
-    @Query("SELECT * FROM meuble ORDER BY ordre")
-    abstract fun observerMeubles(): Flow<List<MeubleComplet>>
-
-    @Insert
-    abstract suspend fun insererMeuble(meuble: Meuble): Long
-
-    @Update
-    abstract suspend fun modifierMeubles(vararg meubles: Meuble)
-
-    @Delete
-    abstract suspend fun supprimerMeuble(meuble: Meuble)
-
-    @Insert
-    abstract suspend fun insererEtagere(etagere: Etagere): Long
-
-    @Update
-    abstract suspend fun modifierEtageres(vararg etageres: Etagere)
-
-    @Delete
-    abstract suspend fun supprimerEtagere(etagere: Etagere)
-
-    @Query("SELECT COALESCE(MAX(ordre) + 1, 0) FROM meuble")
-    abstract suspend fun ordreMeubleSuivant(): Int
-
-    @Query("SELECT COALESCE(MAX(ordre) + 1, 0) FROM etagere WHERE meubleId = :meubleId")
-    abstract suspend fun ordreEtagereSuivant(meubleId: Long): Int
-
-    /** Where the last album went: the add screen starts there, for scanning a whole shelf in a row. */
-    @Query("SELECT etagereId FROM album WHERE etagereId IS NOT NULL ORDER BY ajouteLe DESC, id DESC LIMIT 1")
-    abstract suspend fun derniereEtagere(): Long?
-
-    @Query("SELECT COALESCE(MAX(position) + 1, 0) FROM album WHERE etagereId = :etagereId")
-    abstract suspend fun positionSuivante(etagereId: Long): Int
-
-    /** Puts the album at the end of [etagereId] (or nowhere). */
-    @Transaction
-    open suspend fun deplacer(albumId: Long, etagereId: Long?) {
-        val album = album(albumId) ?: return
-        modifierAlbum(album.copy(etagereId = etagereId, position = etagereId?.let { positionSuivante(it) } ?: 0))
-    }
-
-    @Query("SELECT * FROM album WHERE etagereId = :etagereId ORDER BY position")
-    abstract suspend fun albumsDe(etagereId: Long): List<Album>
-
-    /** Swaps the album with its left (-1) or right (+1) neighbour on the shelf. */
-    @Transaction
-    open suspend fun decaler(albumId: Long, sens: Int) {
-        val album = album(albumId) ?: return
-        val rangee = albumsDe(album.etagereId ?: return)
-        val i = rangee.indexOfFirst { it.id == albumId }
-        val voisin = rangee.getOrNull(i + sens) ?: return
-        modifierAlbum(album.copy(position = voisin.position))
-        modifierAlbum(voisin.copy(position = album.position))
-    }
-
     // Backup
 
-    @Query("SELECT * FROM meuble") abstract suspend fun tousMeubles(): List<Meuble>
-    @Query("SELECT * FROM etagere") abstract suspend fun toutesEtageres(): List<Etagere>
     @Query("SELECT * FROM album") abstract suspend fun tousAlbums(): List<Album>
     @Query("SELECT * FROM auteur") abstract suspend fun tousAuteurs(): List<Auteur>
     @Query("SELECT * FROM album_auteur") abstract suspend fun tousLiens(): List<AlbumAuteur>
     @Query("SELECT * FROM cote_historique") abstract suspend fun toutHistorique(): List<CoteHistorique>
 
-    @Query("DELETE FROM meuble") protected abstract suspend fun viderMeubles()
     @Query("DELETE FROM album") protected abstract suspend fun viderAlbums()
     @Query("DELETE FROM auteur") protected abstract suspend fun viderAuteurs()
 
-    @Insert protected abstract suspend fun insererMeubles(l: List<Meuble>)
-    @Insert protected abstract suspend fun insererEtageres(l: List<Etagere>)
     @Insert protected abstract suspend fun insererAlbums(l: List<Album>)
     @Insert protected abstract suspend fun insererAuteurs(l: List<Auteur>)
     @Insert protected abstract suspend fun insererLiens(l: List<AlbumAuteur>)
     @Insert protected abstract suspend fun insererHistoriques(l: List<CoteHistorique>)
 
     /**
-     * Adds a file's albums to the collection, all or nothing: new ids, no shelf (the file's
-     * furniture isn't brought in), authors matched by name. An ISBN already present is skipped.
+     * Adds a file's albums to the collection, all or nothing: new ids, authors matched by
+     * name. An ISBN already present is skipped.
      * Returns how many albums were added.
      */
     @Transaction
@@ -205,7 +142,7 @@ abstract class BdaDao {
         var ajoutes = 0
         for (album in albums) {
             if (album.isbn != null && albumParIsbn(album.isbn) != null) continue
-            val id = ajouter(album.copy(id = 0, etagereId = null, position = 0), auteurs[album.id].orEmpty())
+            val id = ajouter(album.copy(id = 0), auteurs[album.id].orEmpty())
             parAlbum[album.id].orEmpty().forEach { insererHistorique(it.copy(id = 0, albumId = id)) }
             ajoutes++
         }
@@ -215,14 +152,10 @@ abstract class BdaDao {
     /** Replaces the whole collection, all or nothing. Cascades empty the child tables. */
     @Transaction
     open suspend fun remplacerTout(
-        meubles: List<Meuble>, etageres: List<Etagere>, albums: List<Album>,
-        auteurs: List<Auteur>, liens: List<AlbumAuteur>, historique: List<CoteHistorique>,
+        albums: List<Album>, auteurs: List<Auteur>, liens: List<AlbumAuteur>, historique: List<CoteHistorique>,
     ) {
         viderAlbums()
         viderAuteurs()
-        viderMeubles()
-        insererMeubles(meubles)
-        insererEtageres(etageres)
         insererAlbums(albums)
         insererAuteurs(auteurs)
         insererLiens(liens)

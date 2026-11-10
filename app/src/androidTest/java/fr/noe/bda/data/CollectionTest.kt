@@ -14,8 +14,6 @@ import fr.noe.bda.data.local.Album
 import fr.noe.bda.data.local.BdaDao
 import fr.noe.bda.data.local.BdaDatabase
 import fr.noe.bda.data.local.CoteStatut
-import fr.noe.bda.data.local.Etagere
-import fr.noe.bda.data.local.Meuble
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
@@ -121,17 +119,14 @@ class CollectionTest {
 
     @Test
     fun un_scan_complete_l_album_importe_au_lieu_de_le_doubler() = runTest {
-        val meuble = dao.insererMeuble(Meuble(nom = "Salon", ordre = 0))
-        val etagere = dao.insererEtagere(Etagere(meubleId = meuble, nom = "Haut", ordre = 0))
         val importe = dao.ajouter(Album(titre = "zombillenium", serie = "zombillenium", tome = "1", coteStatut = CoteStatut.EXCEL, coteMin = 50, coteMax = 60), emptyList())
-        val scanne = dao.ajouter(Album(isbn = ISBN, titre = ISBN, etagereId = etagere), emptyList())
+        val scanne = dao.ajouter(Album(isbn = ISBN, titre = ISBN), emptyList())
 
         cotes.rafraichir(scanne)
 
         assertEquals(null, dao.album(scanne))
         dao.album(importe)!!.let {
             assertEquals(ISBN, it.isbn)
-            assertEquals(etagere, it.etagereId)
             assertEquals("Gretchen", it.titre)
             assertEquals(CoteStatut.TROUVEE, it.coteStatut)
         }
@@ -189,36 +184,7 @@ class CollectionTest {
     }
 
     @Test
-    fun deplacer_puis_decaler_sur_une_etagere() = runTest {
-        val meuble = dao.insererMeuble(Meuble(nom = "Salon", ordre = 0))
-        val etagere = dao.insererEtagere(Etagere(meubleId = meuble, nom = "Haut", ordre = 0))
-        val a = dao.ajouter(Album(titre = "A"), emptyList())
-        val b = dao.ajouter(Album(titre = "B"), emptyList())
-        dao.deplacer(a, etagere)
-        dao.deplacer(b, etagere)
-        assertEquals(listOf("A", "B"), dao.albumsDe(etagere).map { it.titre })
-
-        dao.decaler(b, -1)
-
-        assertEquals(listOf("B", "A"), dao.albumsDe(etagere).map { it.titre })
-        assertEquals(etagere, dao.derniereEtagere())
-    }
-
-    @Test
-    fun supprimer_une_etagere_ne_supprime_pas_ses_albums() = runTest {
-        val meuble = dao.insererMeuble(Meuble(nom = "Salon", ordre = 0))
-        val etagere = dao.insererEtagere(Etagere(meubleId = meuble, nom = "Haut", ordre = 0))
-        val a = dao.ajouter(Album(titre = "A", etagereId = etagere), emptyList())
-
-        dao.supprimerMeuble(Meuble(meuble, "Salon", 0))
-
-        assertEquals(null, dao.album(a)!!.etagereId)
-    }
-
-    @Test
     fun une_sauvegarde_restauree_redonne_la_meme_collection() = runTest {
-        val meuble = dao.insererMeuble(Meuble(nom = "Salon", ordre = 0))
-        dao.insererEtagere(Etagere(meubleId = meuble, nom = "Haut", ordre = 0))
         val id = ajouter(auteurs = listOf("Bablet, Mathieu"))
         cotes.rafraichir(id)
         val sauvegarde = Sauvegarde(dao)
@@ -229,6 +195,19 @@ class CollectionTest {
 
         val apres = sauvegarde.lire(sauvegarde.exporter())
         assertEquals(avant.copy(exporteLe = 0), apres.copy(exporteLe = 0))
+    }
+
+    @Test
+    fun une_ancienne_sauvegarde_avec_meubles_s_importe_encore() = runTest {
+        val ancienne = """{"version":1,"exporteLe":0,
+            "meubles":[{"id":1,"nom":"Salon","ordre":0}],"etageres":[{"id":1,"meubleId":1,"nom":"Haut","ordre":0}],
+            "albums":[{"id":1,"titre":"Gretchen","serie":"Zombillénium","tome":"1","etagereId":1,"position":0,"coteStatut":"TROUVEE","coteMin":10,"coteMax":15}],
+            "auteurs":[],"albumsAuteurs":[],"historique":[]}"""
+        val sauvegarde = Sauvegarde(dao)
+
+        sauvegarde.restaurer(sauvegarde.lire(ancienne))
+
+        assertEquals(listOf("Gretchen"), dao.tousAlbums().map { it.titre })
     }
 
     companion object {
