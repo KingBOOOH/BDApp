@@ -1,0 +1,78 @@
+{
+    "publishers": [
+        "Delacorte Press"
+    ],
+    "number_of_pages": 336,
+    "weight": "1.2 pounds",
+    "covers": [
+        374222
+    ],
+    "physical_format": "Hardcover",
+    "last_modified": {
+        "type": "/type/datetime",
+        "value": "2019-07-31T04:17:56.753445"
+    },
+    "latest_revision": 7,
+    "key": "/books/OL7850577M",
+    "authors": [
+        {
+            "key": "/authors/OL2787507A"
+        },
+        {
+            "key": "/authors/OL2787508A"
+        }
+    ],
+    "subjects": [
+        "Google",
+        "Small Business/Entrepreneurship",
+        "Corporate & Business History - General",
+        "Computer Industry (Economic Aspects)",
+        "History Of Specific Companies",
+        "Business & Economics",
+        "Industries - Media & Communications Industries",
+        "Business/Economics",
+        "Entrepreneurship",
+        "Business & Economics / Entrepreneurship",
+        "United States",
+        "Browsers (Computer programs)"
+    ],
+    "isbn_13": [
+        "9780553804577"
+    ],
+    "source_records": [
+        "amazon:055380457X:by:223708513:253490",
+        "marc:marc_ithaca_college/ic_marc.mrc:209367639:815"
+    ],
+    "title": "The Google Story",
+    "identifiers": {
+        "librarything": [
+            "50614"
+        ],
+        "goodreads": [
+            "1269630"
+        ]
+    },
+    "created": {
+        "type": "/type/datetime",
+        "value": "2008-04-29T15:03:11.581851"
+    },
+    "languages": [
+        {
+            "key": "/languages/eng"
+        }
+    ],
+    "isbn_10": [
+        "055380457X"
+    ],
+    "publish_date": "November 15, 2005",
+    "works": [
+        {
+            "key": "/works/OL4079406W"
+        }
+    ],
+    "type": {
+        "key": "/type/edition"
+    },
+    "physical_dimensions": "9 x 6.3 x 1.1 inches",
+    "revision": 7
+}

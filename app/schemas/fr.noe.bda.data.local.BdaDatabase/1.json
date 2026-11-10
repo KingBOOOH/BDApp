@@ -1,0 +1,447 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "5392f6465de5d4a51421ae1f94081fe8",
+    "entities": [
+      {
+        "tableName": "meuble",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nom` TEXT NOT NULL, `ordre` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nom",
+            "columnName": "nom",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ordre",
+            "columnName": "ordre",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "etagere",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `meubleId` INTEGER NOT NULL, `nom` TEXT NOT NULL, `ordre` INTEGER NOT NULL, FOREIGN KEY(`meubleId`) REFERENCES `meuble`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "meubleId",
+            "columnName": "meubleId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nom",
+            "columnName": "nom",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ordre",
+            "columnName": "ordre",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_etagere_meubleId",
+            "unique": false,
+            "columnNames": [
+              "meubleId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_etagere_meubleId` ON `${TABLE_NAME}` (`meubleId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "meuble",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "meubleId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "album",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isbn` TEXT, `titre` TEXT NOT NULL, `serie` TEXT, `serieNorm` TEXT, `tome` TEXT, `editeur` TEXT, `couvertureUrl` TEXT, `couvertureFichier` TEXT, `couleurDos` INTEGER, `hauteurCm` REAL, `epaisseurCm` REAL, `pages` INTEGER, `bdthequeUrl` TEXT, `coteMin` INTEGER, `coteMax` INTEGER, `coteTexte` TEXT, `coteMajLe` INTEGER, `coteStatut` TEXT NOT NULL, `etagereId` INTEGER, `position` INTEGER NOT NULL, `ajouteLe` INTEGER NOT NULL, FOREIGN KEY(`etagereId`) REFERENCES `etagere`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isbn",
+            "columnName": "isbn",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "titre",
+            "columnName": "titre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serie",
+            "columnName": "serie",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "serieNorm",
+            "columnName": "serieNorm",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tome",
+            "columnName": "tome",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "editeur",
+            "columnName": "editeur",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "couvertureUrl",
+            "columnName": "couvertureUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "couvertureFichier",
+            "columnName": "couvertureFichier",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "couleurDos",
+            "columnName": "couleurDos",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "hauteurCm",
+            "columnName": "hauteurCm",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "epaisseurCm",
+            "columnName": "epaisseurCm",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "pages",
+            "columnName": "pages",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "bdthequeUrl",
+            "columnName": "bdthequeUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "coteMin",
+            "columnName": "coteMin",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "coteMax",
+            "columnName": "coteMax",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "coteTexte",
+            "columnName": "coteTexte",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "coteMajLe",
+            "columnName": "coteMajLe",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "coteStatut",
+            "columnName": "coteStatut",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "etagereId",
+            "columnName": "etagereId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "position",
+            "columnName": "position",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ajouteLe",
+            "columnName": "ajouteLe",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_album_isbn",
+            "unique": true,
+            "columnNames": [
+              "isbn"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_album_isbn` ON `${TABLE_NAME}` (`isbn`)"
+          },
+          {
+            "name": "index_album_serieNorm",
+            "unique": false,
+            "columnNames": [
+              "serieNorm"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_album_serieNorm` ON `${TABLE_NAME}` (`serieNorm`)"
+          },
+          {
+            "name": "index_album_etagereId_position",
+            "unique": false,
+            "columnNames": [
+              "etagereId",
+              "position"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_album_etagereId_position` ON `${TABLE_NAME}` (`etagereId`, `position`)"
+          },
+          {
+            "name": "index_album_coteStatut",
+            "unique": false,
+            "columnNames": [
+              "coteStatut"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_album_coteStatut` ON `${TABLE_NAME}` (`coteStatut`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "etagere",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "etagereId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "auteur",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nom` TEXT NOT NULL, `nomNorm` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nom",
+            "columnName": "nom",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nomNorm",
+            "columnName": "nomNorm",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_auteur_nomNorm",
+            "unique": true,
+            "columnNames": [
+              "nomNorm"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_auteur_nomNorm` ON `${TABLE_NAME}` (`nomNorm`)"
+          }
+        ]
+      },
+      {
+        "tableName": "album_auteur",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`albumId` INTEGER NOT NULL, `auteurId` INTEGER NOT NULL, PRIMARY KEY(`albumId`, `auteurId`), FOREIGN KEY(`albumId`) REFERENCES `album`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`auteurId`) REFERENCES `auteur`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "albumId",
+            "columnName": "albumId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "auteurId",
+            "columnName": "auteurId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "albumId",
+            "auteurId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_album_auteur_auteurId",
+            "unique": false,
+            "columnNames": [
+              "auteurId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_album_auteur_auteurId` ON `${TABLE_NAME}` (`auteurId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "album",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "albumId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "auteur",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "auteurId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "cote_historique",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `albumId` INTEGER NOT NULL, `min` INTEGER, `max` INTEGER, `date` INTEGER NOT NULL, FOREIGN KEY(`albumId`) REFERENCES `album`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "albumId",
+            "columnName": "albumId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "min",
+            "columnName": "min",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "max",
+            "columnName": "max",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_cote_historique_albumId",
+            "unique": false,
+            "columnNames": [
+              "albumId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_cote_historique_albumId` ON `${TABLE_NAME}` (`albumId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "album",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "albumId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5392f6465de5d4a51421ae1f94081fe8')"
+    ]
+  }
+}

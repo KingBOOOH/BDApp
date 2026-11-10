@@ -1,0 +1,523 @@
+{
+    "numFound": 508,
+    "start": 0,
+    "numFoundExact": true,
+    "num_found": 508,
+    "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+    "q": "le petit prince",
+    "offset": null,
+    "docs": [
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "cover_i": 10708272,
+            "first_publish_year": 1943,
+            "key": "/works/OL10263W",
+            "title": "Le petit prince",
+            "editions": {
+                "numFound": 428,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le petit prince",
+                        "cover_i": 10778405,
+                        "publish_date": [
+                            "1976"
+                        ],
+                        "isbn": [
+                            "9789001708528",
+                            "9001708528"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry",
+                "Gallimard"
+            ],
+            "cover_i": 966008,
+            "first_publish_year": 1999,
+            "key": "/works/OL34904927W",
+            "title": "Le Petit Prince",
+            "editions": {
+                "numFound": 3,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince",
+                        "publish_date": [
+                            "2015-06-25"
+                        ],
+                        "isbn": [
+                            "9782070667918",
+                            "207066791X"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "cover_i": 3077707,
+            "first_publish_year": 2002,
+            "key": "/works/OL24701569W",
+            "title": "Le petit prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "J'apprends a Compter Avec Le Petit Prince",
+                        "cover_i": 3077707,
+                        "publish_date": [
+                            "January 2002"
+                        ],
+                        "isbn": [
+                            "9782070542703",
+                            "207054270X"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "key": "/works/OL15723265W",
+            "title": "Hoa\u0300ng tu be\u0301",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Hoa\u0300ng tu be\u0301"
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "cover_i": 10555406,
+            "first_publish_year": 1987,
+            "key": "/works/OL15723368W",
+            "title": "O principezinho",
+            "editions": {
+                "numFound": 2,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "O Principezinho",
+                        "publish_date": [
+                            "1987"
+                        ],
+                        "isbn": [
+                            "9726390001",
+                            "9789726390008"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Marc Roy"
+            ],
+            "first_publish_year": 1969,
+            "key": "/works/OL6763070W",
+            "title": "Pour le petit prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Pour le petit prince.",
+                        "publish_date": [
+                            "1969"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Hwameiyuan Press",
+                "Hwameiyuan Press",
+                "Hwameiyuan Press"
+            ],
+            "cover_i": 11974009,
+            "first_publish_year": 2017,
+            "key": "/works/OL25134954W",
+            "title": "Le Petit Prince -- \u5c0f\u738b\u5b50 : The Little Prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince -- \u5c0f\u738b\u5b50 : The Little Prince",
+                        "cover_i": 11974009,
+                        "publish_date": [
+                            "Nov 21, 2017"
+                        ],
+                        "isbn": [
+                            "9781538056646",
+                            "153805664X"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Jacques Ardouin"
+            ],
+            "first_publish_year": 1978,
+            "key": "/works/OL13586483W",
+            "title": "Le petit prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le petit prince",
+                        "publish_date": [
+                            "1978"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "cover_i": 10459082,
+            "first_publish_year": 1994,
+            "key": "/works/OL18189707W",
+            "title": "Ma\u0142y Ksi\u0105\u017c\u0119",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Ma\u0142y Ksi\u0105\u017c\u0119",
+                        "cover_i": 12662870,
+                        "publish_date": [
+                            "2009"
+                        ],
+                        "isbn": [
+                            "9788374954006",
+                            "8374954000"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "IRENA COLLECTIF"
+            ],
+            "cover_i": 10651106,
+            "first_publish_year": 2020,
+            "key": "/works/OL24206538W",
+            "title": "Le petit prince",
+            "editions": {
+                "numFound": 2,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le petit prince",
+                        "cover_i": 10651108,
+                        "publish_date": [
+                            "Jun 10, 2020"
+                        ],
+                        "isbn": [
+                            "9788830302877",
+                            "8830302872"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry",
+                "Alba Longa"
+            ],
+            "cover_i": 15260826,
+            "first_publish_year": 2009,
+            "key": "/works/OL29830346W",
+            "title": "Le Petit Prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince",
+                        "publish_date": [
+                            "Oct 17, 2014"
+                        ],
+                        "isbn": [
+                            "9781502878267",
+                            "1502878267"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Calixthe Beyala",
+                "Marjolijn De Jager"
+            ],
+            "cover_i": 275134,
+            "first_publish_year": 1992,
+            "key": "/works/OL827505W",
+            "title": "Loukoum",
+            "editions": {
+                "numFound": 6,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le petit prince de Belleville",
+                        "publish_date": [
+                            "1993"
+                        ],
+                        "isbn": [
+                            "2277235520",
+                            "9782277235521"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "first_publish_year": 2016,
+            "key": "/works/OL34625990W",
+            "title": "Le Petit Prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince",
+                        "publish_date": [
+                            "2016-09-03"
+                        ],
+                        "isbn": [
+                            "9789461984227",
+                            "9461984227"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Bahribook",
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "first_publish_year": 2017,
+            "key": "/works/OL29748599W",
+            "title": "LITTLE PRINCE / le PETIT PRINCE : Bilingual Version",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "LITTLE PRINCE / le PETIT PRINCE : Bilingual Version",
+                        "publish_date": [
+                            "2017"
+                        ],
+                        "isbn": [
+                            "9781973177616",
+                            "1973177617"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Franc\u0327oise Lefe\u0300vre"
+            ],
+            "first_publish_year": 1990,
+            "key": "/works/OL11467155W",
+            "title": "Le petit prince cannibale",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le petit prince cannibale.",
+                        "publish_date": [
+                            "1990"
+                        ],
+                        "isbn": [
+                            "2277230839",
+                            "9782277230830"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry",
+                "Christophe Quillien",
+                "Huginn Munnin"
+            ],
+            "first_publish_year": 2015,
+            "key": "/works/OL30006560W",
+            "title": "Le Petit Prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince",
+                        "publish_date": [
+                            "Nov 16, 2015"
+                        ],
+                        "isbn": [
+                            "9782364801912",
+                            "2364801915"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "cover_i": 3078131,
+            "first_publish_year": 2003,
+            "key": "/works/OL15723284W",
+            "title": "Le Petit Prince voyage",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince voyage",
+                        "cover_i": 3078131,
+                        "publish_date": [
+                            "May 29, 2003"
+                        ],
+                        "isbn": [
+                            "9782070555512",
+                            "2070555518"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "L. P. Sicard"
+            ],
+            "cover_i": 14587931,
+            "first_publish_year": 2024,
+            "key": "/works/OL37894387W",
+            "title": "Le Petit Prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince",
+                        "cover_i": 14587931,
+                        "publish_date": [
+                            "2024"
+                        ],
+                        "isbn": [
+                            "9782898083037",
+                            "2898083038"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Joann Sfar",
+                "Gallimard"
+            ],
+            "cover_i": 11978083,
+            "first_publish_year": 2008,
+            "key": "/works/OL25171634W",
+            "title": "Le Petit Prince d'apres l'oeuvre d' Antoine de Saint Exupery",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "Le Petit Prince d'apres l'oeuvre d' Antoine de Saint Exupery",
+                        "cover_i": 11978083,
+                        "publish_date": [
+                            "Sep 18, 2008"
+                        ],
+                        "isbn": [
+                            "9782070603398",
+                            "2070603393"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "author_name": [
+                "Antoine de Saint-Exup\u00e9ry"
+            ],
+            "cover_i": 1120322,
+            "first_publish_year": 2003,
+            "key": "/works/OL7990828W",
+            "title": "I Am the Little Prince / Je Suis Le Petit Prince",
+            "editions": {
+                "numFound": 1,
+                "start": 0,
+                "numFoundExact": true,
+                "docs": [
+                    {
+                        "title": "I Am the Little Prince / Je Suis Le Petit Prince",
+                        "cover_i": 1120322,
+                        "publish_date": [
+                            "2003"
+                        ],
+                        "isbn": [
+                            "0152047301",
+                            "9780152047306"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

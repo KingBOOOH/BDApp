@@ -1,0 +1,222 @@
+{
+    "ISBN:9780553804577": {
+        "url": "http://openlibrary.org/books/OL20944934M/The_Google_story",
+        "key": "/books/OL20944934M",
+        "title": "The Google story",
+        "authors": [
+            {
+                "url": "http://openlibrary.org/authors/OL763801A/David_A._Vise",
+                "name": "David A. Vise"
+            },
+            {
+                "url": "http://openlibrary.org/authors/OL2787507A/David_Vise",
+                "name": "David Vise"
+            },
+            {
+                "url": "http://openlibrary.org/authors/OL2787508A/Mark_Malseed",
+                "name": "Mark Malseed"
+            }
+        ],
+        "number_of_pages": 250,
+        "pagination": "250 p. ;",
+        "by_statement": "A. David Vise and Mark Malseed.",
+        "identifiers": {
+            "goodreads": [
+                "1269630"
+            ],
+            "librarything": [
+                "50614"
+            ],
+            "isbn_10": [
+                "055380457X"
+            ],
+            "lccn": [
+                "2005056947"
+            ],
+            "oclc": [
+                "61702717",
+                "62230858"
+            ],
+            "openlibrary": [
+                "OL20944934M"
+            ]
+        },
+        "classifications": {
+            "lc_classifications": [
+                "TK5105.885.G66 V57 2005"
+            ]
+        },
+        "publishers": [
+            {
+                "name": "Macmillan"
+            },
+            {
+                "name": "Delacorte Press"
+            }
+        ],
+        "publish_places": [
+            {
+                "name": "New York"
+            }
+        ],
+        "publish_date": "2005",
+        "subjects": [
+            {
+                "name": "Browsers (Computer programs)",
+                "url": "https://openlibrary.org/subjects/browsers_(computer_programs)"
+            },
+            {
+                "name": "Business",
+                "url": "https://openlibrary.org/subjects/business"
+            },
+            {
+                "name": "Engineering",
+                "url": "https://openlibrary.org/subjects/engineering"
+            },
+            {
+                "name": "Entrepreneurship",
+                "url": "https://openlibrary.org/subjects/entrepreneurship"
+            },
+            {
+                "name": "Google",
+                "url": "https://openlibrary.org/subjects/google"
+            },
+            {
+                "name": "Google (Firm)",
+                "url": "https://openlibrary.org/subjects/google_(firm)"
+            },
+            {
+                "name": "History",
+                "url": "https://openlibrary.org/subjects/history"
+            },
+            {
+                "name": "Internet industry",
+                "url": "https://openlibrary.org/subjects/internet_industry"
+            },
+            {
+                "name": "Nonfiction",
+                "url": "https://openlibrary.org/subjects/nonfiction"
+            },
+            {
+                "name": "Technology",
+                "url": "https://openlibrary.org/subjects/technology"
+            },
+            {
+                "name": "Web search engines",
+                "url": "https://openlibrary.org/subjects/web_search_engines"
+            },
+            {
+                "name": "Search engines",
+                "url": "https://openlibrary.org/subjects/search_engines"
+            },
+            {
+                "name": "Biography",
+                "url": "https://openlibrary.org/subjects/biography"
+            },
+            {
+                "name": "Small Business/Entrepreneurship",
+                "url": "https://openlibrary.org/subjects/small_business/entrepreneurship"
+            },
+            {
+                "name": "Corporate & Business History - General",
+                "url": "https://openlibrary.org/subjects/corporate_&_business_history_-_general"
+            },
+            {
+                "name": "Computer Industry (Economic Aspects)",
+                "url": "https://openlibrary.org/subjects/computer_industry_(economic_aspects)"
+            },
+            {
+                "name": "History Of Specific Companies",
+                "url": "https://openlibrary.org/subjects/history_of_specific_companies"
+            },
+            {
+                "name": "Business & Economics",
+                "url": "https://openlibrary.org/subjects/business_&_economics"
+            },
+            {
+                "name": "Industries - Media & Communications Industries",
+                "url": "https://openlibrary.org/subjects/industries_-_media_&_communications_industries"
+            },
+            {
+                "name": "Business/Economics",
+                "url": "https://openlibrary.org/subjects/business/economics"
+            },
+            {
+                "name": "Business & Economics / Entrepreneurship",
+                "url": "https://openlibrary.org/subjects/business_&_economics_/_entrepreneurship"
+            },
+            {
+                "name": "United States",
+                "url": "https://openlibrary.org/subjects/united_states"
+            },
+            {
+                "name": "Google Inc",
+                "url": "https://openlibrary.org/subjects/google_inc"
+            },
+            {
+                "name": "Suchmaschine",
+                "url": "https://openlibrary.org/subjects/suchmaschine"
+            },
+            {
+                "name": "Capacidad empresarial",
+                "url": "https://openlibrary.org/subjects/capacidad_empresarial"
+            },
+            {
+                "name": "Navegadores (Programas de computadora)",
+                "url": "https://openlibrary.org/subjects/navegadores_(programas_de_computadora)"
+            },
+            {
+                "name": "Navigateurs (Logiciels)",
+                "url": "https://openlibrary.org/subjects/navigateurs_(logiciels)"
+            },
+            {
+                "name": "Entrepreneuriat",
+                "url": "https://openlibrary.org/subjects/entrepreneuriat"
+            },
+            {
+                "name": "Google (Firma)",
+                "url": "https://openlibrary.org/subjects/google_(firma)"
+            },
+            {
+                "name": "Google (Firme)",
+                "url": "https://openlibrary.org/subjects/google_(firme)"
+            }
+        ],
+        "subject_places": [
+            {
+                "name": "United States",
+                "url": "https://openlibrary.org/subjects/place:united_states"
+            }
+        ],
+        "subject_people": [
+            {
+                "name": "Larry Page",
+                "url": "https://openlibrary.org/subjects/person:larry_page"
+            },
+            {
+                "name": "Larry Page (1973-)",
+                "url": "https://openlibrary.org/subjects/person:larry_page_(1973-)"
+            },
+            {
+                "name": "Sergey Brin",
+                "url": "https://openlibrary.org/subjects/person:sergey_brin"
+            },
+            {
+                "name": "Sergey Brin (1973-)",
+                "url": "https://openlibrary.org/subjects/person:sergey_brin_(1973-)"
+            }
+        ],
+        "ebooks": [
+            {
+                "preview_url": "https://archive.org/details/googlestoryinsid00davi",
+                "availability": "restricted",
+                "formats": {}
+            }
+        ],
+        "cover": {
+            "small": "https://covers.openlibrary.org/b/id/8327149-S.jpg",
+            "medium": "https://covers.openlibrary.org/b/id/8327149-M.jpg",
+            "large": "https://covers.openlibrary.org/b/id/8327149-L.jpg"
+        }
+    }
+}

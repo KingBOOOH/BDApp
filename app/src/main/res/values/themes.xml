@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Paper behind Compose's first frame, so the window doesn't flash white or black. -->
+    <style name="Theme.Bda" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/shelf_paper</item>
+    </style>
+</resources>
