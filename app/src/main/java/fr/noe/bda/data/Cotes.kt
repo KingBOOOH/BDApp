@@ -23,7 +23,7 @@ import javax.inject.Singleton
  * the bulk update worker, so they all follow the same rules:
  * - a failure never erases a known cote (status ERREUR, values kept);
  * - a hand-typed cote (MANUELLE) is never overwritten;
- * - a cote from the parents' list (EXCEL) is only replaced by an actual bedetheque estimation;
+ * - a cote from an imported spreadsheet (EXCEL) is only replaced by an actual bedetheque estimation;
  * - a history line is added only when the cote changes;
  * - a scanned album matching one imported without ISBN (same series and tome) completes it
  *   instead of becoming a duplicate.
@@ -64,7 +64,7 @@ class Cotes @Inject constructor(
         }
     }
 
-    /** ISBN first, then series + tome (albums from the parents' list), then the title if it is a real one. */
+    /** ISBN first, then series + tome (albums imported from a spreadsheet), then the title if it is a real one. */
     private suspend fun chercher(album: Album) = if (album.isbn == null && album.tome == null) {
         // A one-shot from the list: its "series" name is its title, the only thing to search by
         bedetheque.trouverEdition(null, album.titre)
@@ -129,7 +129,7 @@ class Cotes @Inject constructor(
         val cote = edition.cote
         val (min, max, texte, statut) = when {
             cote is Cote.Estimee -> Quatre(cote.minEuros, cote.maxEuros, cote.texte, CoteStatut.TROUVEE)
-            // Only a real estimation replaces the parents' figure
+            // Only a real estimation replaces the spreadsheet figure
             album.coteStatut == CoteStatut.EXCEL -> Quatre(album.coteMin, album.coteMax, album.coteTexte, CoteStatut.EXCEL)
             cote == Cote.NonCotee -> Quatre(null, null, "non coté", CoteStatut.NON_COTEE)
             // The sheet changed shape: keep the last known values

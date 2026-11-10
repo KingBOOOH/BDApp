@@ -61,7 +61,7 @@ enum class CoteStatut {
     A_CHOISIR,
     /** Typed by hand: never overwritten by an update. */
     MANUELLE,
-    /** From the parents' spreadsheet: replaced only by an actual bedetheque estimation. */
+    /** From an imported spreadsheet: replaced only by an actual bedetheque estimation. */
     EXCEL,
     /** Last refresh failed; the previous cote is kept. */
     ERREUR,
