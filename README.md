@@ -2,7 +2,9 @@
 
 Application Android personnelle pour cataloguer une collection de bandes dessinées : où chaque album est rangé, combien il vaut (cote BDthèque) et un écran pour vérifier si un album est déjà possédé.
 
-100 % locale : pas de compte, pas de serveur, pas de télémétrie. Usage strictement personnel.
+100 % locale : pas de compte, pas de serveur, pas de télémétrie.
+
+> **Projet personnel publié à titre de démonstration.** L'appli est faite pour un usage personnel et n'est pas distribuée : aucun APK n'est fourni. Le code est public pour montrer le travail réalisé.
 
 ## Fonctionnalités
 
