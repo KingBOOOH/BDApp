@@ -89,10 +89,6 @@ Attention : `connectedDebugAndroidTest` désinstalle l'appli à la fin, ce qui e
 
 L'écran Outils › « Test BDthèque (diagnostic) » lance toute la chaîne sur une liste d'ISBN et produit un rapport, partageable ou lisible avec `adb logcat -s BDA-Rapport`.
 
-## Limites connues
-
-- L'import remplace toute la collection (pas de fusion).
-
 ## Licence
 
 Code sous licence MIT (voir `LICENSE`). Les extraits de pages de `app/src/test/resources/bedetheque/` restent la propriété de bedetheque.com et ne servent qu'aux tests.
